@@ -9,33 +9,26 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import {arrayToCSV, arrayToTSV} from './converters';
 
 const styles = theme => ({
     root: {
         overflowX: 'auto',
         textAlign: "center",
-        paddingBottom: theme.spacing.unit
+        paddingBottom: theme.spacing(1)
     },
     underline: {
         textDecoration: "underline",
         cursor: "pointer"
     },
     title: {
-        paddingTop: theme.spacing.unit
+        paddingTop: theme.spacing(1)
     },
     topSpace: {
-        paddingTop: theme.spacing.unit*2,
-        paddingBottom: theme.spacing.unit
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(1)
 
     }
 });
-
-const formats = {
-    JSON:'.json',
-    TSV: '.tsv',
-    CSV: '.csv',
-};
 
 class LocationTable extends React.Component {
 
@@ -53,28 +46,6 @@ class LocationTable extends React.Component {
             this.onQueryChange(query)
         }
     }
-
-    download = (format) => () => {
-        let dataStr;
-        let {query} = this.props.data;
-
-        switch (format) {
-            case formats.CSV:
-                dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(arrayToCSV(this.state.result));
-                break;
-            case formats.TSV:
-                dataStr = "data:text/tsv;charset=utf-8," + encodeURIComponent(arrayToTSV(this.state.result));
-                break;
-            case formats.JSON:
-            default:
-                dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.state.result));
-        }
-
-        let dlAnchorElem = document.createElement('a');
-        dlAnchorElem.setAttribute("href", dataStr);
-        dlAnchorElem.setAttribute("download", query + "_locations" + format);
-        dlAnchorElem.click();
-    };
 
     onQueryChange = (query) => {
         this.setState({
@@ -103,10 +74,6 @@ class LocationTable extends React.Component {
 
         return (
             <Paper className={classes.root}>
-                <LinearProgress variant="query" style={this.state.loading ? {opacity:1} : {opacity:0}}/>
-                <Typography className={classes.title} variant={"h6"}>
-                    Protein sub-cellular locations
-                </Typography>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
@@ -127,15 +94,6 @@ class LocationTable extends React.Component {
                         ))}
                     </TableBody>
                 </Table>
-                <Typography className={classes.topSpace} component={"div"} variant="body1">
-                    {'Download data in '}
-                    <strong className={classes.underline} onClick={this.download(formats.JSON)}>{"JSON format"}</strong>
-                    {', or '}
-                    <strong className={classes.underline} onClick={this.download(formats.CSV)}>{"CSV format"}</strong>
-                    {', or '}
-                    <strong className={classes.underline} onClick={this.download(formats.TSV)}>{"TSV format"}</strong>
-                    .
-                </Typography>
             </Paper>
         );
     }
