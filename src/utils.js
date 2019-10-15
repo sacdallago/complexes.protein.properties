@@ -1,8 +1,8 @@
 import CORUM from './data/allComplexes';
 
-// const uniprot_accessions = CORUM
-//     .map(e => e['subunits(UniProt IDs)'].split(';').map(accession => {return {search_item: accession.toLowerCase(), id: e['ComplexID']}}))
-//     .reduce((current, previous) => previous.concat(current), []);
+const uniprot_accessions = CORUM
+    .map(e => e['subunits(UniProt IDs)'].split(';').map(accession => {return {search_item: accession.toLowerCase(), id: e['ComplexID']}}))
+    .reduce((current, previous) => previous.concat(current), []);
 //
 // const gene_names = CORUM
 //     .map(e => e['subunits(Gene name)'].split(';').map(gene => {return {search_item: gene.toLowerCase(), id: e['ComplexID']}}))
@@ -24,13 +24,13 @@ import CORUM from './data/allComplexes';
 //     .map(e => e['FunCat description'].split(';').map(funcat_description => {return {search_item: funcat_description.toLowerCase(), id: e['ComplexID']}}))
 //     .reduce((current, previous) => previous.concat(current), []);
 //
-// const filterQuery = (query, search_array) => {
-//     query = query.toLowerCase();
-//
-//     return search_array
-//         .map(element => {return {...element, match: element.search_item.indexOf(query)}})
-//         .filter(element => element.match > -1);
-// };
+const filterQuery = (query, search_array) => {
+    query = query.toLowerCase();
+
+    return search_array
+        .map(element => {return {...element, match: element.search_item.indexOf(query)}})
+        .filter(element => element.match > -1);
+};
 
 export const assessQuery = (query) => {
     // return {
@@ -44,7 +44,7 @@ export const assessQuery = (query) => {
 
     return {
         query: query,
-        accession_matches: [],
+        accession_matches: filterQuery(query, uniprot_accessions),
         protein_name_matches: [],
         gene_matches: [],
         complex_matches: [],
