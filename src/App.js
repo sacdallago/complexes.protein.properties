@@ -30,6 +30,11 @@ const styles = theme => ({
 class App extends React.Component {
     state = {
         query: '',
+        accession_matches: null,
+        protein_name_matches: null,
+        gene_matches: null,
+        complex_matches: null,
+        funcat_matches: null
     };
 
     filterResults = () => {
@@ -42,6 +47,14 @@ class App extends React.Component {
         } = assessQuery(this.state.query);
 
         console.log(accession_matches);
+
+        this.setState({
+            accession_matches,
+            protein_name_matches,
+            gene_matches,
+            complex_matches,
+            funcat_matches
+        });
     };
 
     onInputChange = (query) => {
@@ -67,7 +80,7 @@ class App extends React.Component {
                 <Grid item xs={3} />
                 <Grid item xs={false} md={2} xl={2} />
                 <Grid item className={classes.search} xs={12} md={8} xl={8}>
-                    <ResultsTable data={this.state} />
+                    {this.state.accession_matches && <ResultsTable data={this.state.accession_matches} />}
                 </Grid>
                 <Grid item xs={false} md={2} xl={2} />
                 <Grid item className={classes.search} xs={12}>
