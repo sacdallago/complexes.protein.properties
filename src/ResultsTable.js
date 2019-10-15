@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CORUM from './data/allComplexes';
 import {Typography, Grid, Paper} from "@material-ui/core";
+import OpenInNew from '@material-ui/icons/OpenInNew';
 
 const styles = theme => ({
     root: {
@@ -19,7 +20,9 @@ const styles = theme => ({
     topSpace: {
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(1)
-
+    },
+    smallIcon: {
+        fontSize: "1em"
     }
 });
 
@@ -27,7 +30,7 @@ class LocationTable extends React.Component {
     render() {
         const { classes } = this.props;
 
-        let hit = CORUM[0];
+        let hit = CORUM[420];
 
         return (
             <Paper className={classes.root}>
@@ -67,6 +70,31 @@ class LocationTable extends React.Component {
                                 ...{"some string"}...
                             </strong>
                         </Typography>
+                    </Grid>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={8} />
+                    <Grid item xs={2}>
+                        <a
+                            href={hit['subunits(UniProt IDs)'].split(';').reduce((previous, current) => previous + '&p=' + current,'https://cellmap.protein.properties/ppi?')}
+                            target={"_blank"}
+                        >
+                            <Typography variant={"caption"}>
+                                CellMap
+                            </Typography>
+                            <OpenInNew className={classes.smallIcon} />
+                        </a>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <a
+                            href={"https://protein.melting.degree/complex?id=" + hit['ComplexID']}
+                            target={"_blank"}
+                        >
+                            <Typography variant={"caption"}>
+                                PMDB
+                            </Typography>
+                            <OpenInNew className={classes.smallIcon} />
+                        </a>
                     </Grid>
                 </Grid>
             </Paper>
