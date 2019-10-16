@@ -87,6 +87,9 @@ class App extends React.Component {
                         margin="normal"
                         variant="outlined"
                     />
+                    <Typography variant={"caption"}>
+                        Type above to search by gene or protein id, or keyword.
+                    </Typography>
                 </Grid>
                 <Grid item xs={3} />
                 <Grid item xs={false} md={2} xl={2} />
