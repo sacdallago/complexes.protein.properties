@@ -16,7 +16,8 @@ const styles = theme => ({
         maxWidth: 1100,
         margin: "auto",
         paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(2)
+        paddingRight: theme.spacing(2),
+
     },
     search: {
         width: "100%"

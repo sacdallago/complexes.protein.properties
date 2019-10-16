@@ -1,8 +1,28 @@
 import CORUM from './data/allComplexes';
+import WebWorker from './WebWorker';
+import Executer from './Executer';
 
-const uniprot_accessions = CORUM
-    .map(e => e['subunits(UniProt IDs)'].split(';').map(accession => {return {search_item: accession.toLowerCase(), id: e['ComplexID']}}))
-    .reduce((current, previous) => previous.concat(current), []);
+const worker = new WebWorker(Executer);
+
+const _handleWorker = (event) => {
+    const {data} = event;
+
+    console.log(data);
+};
+
+worker.addEventListener("message", _handleWorker, false);
+
+worker.postMessage({
+    executable: () => {return CORUM
+        .map(e => e['subunits(UniProt IDs)'].split(';').map(accession => {return {search_item: accession.toLowerCase(), id: e['ComplexID']}}))
+        .reduce((current, previous) => previous.concat(current), [])}
+});
+
+const uniprot_accessions = [];
+
+// const uniprot_accessions = CORUM
+//     .map(e => e['subunits(UniProt IDs)'].split(';').map(accession => {return {search_item: accession.toLowerCase(), id: e['ComplexID']}}))
+//     .reduce((current, previous) => previous.concat(current), []);
 //
 // const gene_names = CORUM
 //     .map(e => e['subunits(Gene name)'].split(';').map(gene => {return {search_item: gene.toLowerCase(), id: e['ComplexID']}}))
