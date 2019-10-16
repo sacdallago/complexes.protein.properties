@@ -76,7 +76,7 @@ class App extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Grid container className={classes.root} spacing={2}>
+            <Grid container className={classes.root} spacing={1}>
                 <Grid item xs={3} />
                 <Grid item className={classes.search} xs={6}>
                     <TextField
