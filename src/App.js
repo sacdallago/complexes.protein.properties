@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ResultsTable from './ResultsTable';
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from '@material-ui/core/Grid';
-import {assessQuery} from './utils';
+import {subscribeToFinerWoker, assessQuery} from './utils';
 
 const styles = theme => ({
     attribution: {
@@ -38,16 +38,22 @@ class App extends React.Component {
         funcat_matches: null
     };
 
-    filterResults = () => {
+    constructor(){
+        super();
+
+        subscribeToFinerWoker(this.getResults);
+    }
+
+    getResults = (event) => {
+        const results = event.data;
+
         let {
             accession_matches,
             protein_name_matches,
             gene_matches,
             complex_matches,
             funcat_matches
-        } = assessQuery(this.state.query);
-
-        console.log(accession_matches);
+        } = results;
 
         this.setState({
             accession_matches,
@@ -58,6 +64,10 @@ class App extends React.Component {
         });
     };
 
+    filterResults = () => {
+        assessQuery(this.state.query);
+    };
+
     onInputChange = (query) => {
         this.setState({query: query.target.value}, this.filterResults);
     };
@@ -66,7 +76,7 @@ class App extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Grid container className={classes.root} spacing={0}>
+            <Grid container className={classes.root} spacing={2}>
                 <Grid item xs={3} />
                 <Grid item className={classes.search} xs={6}>
                     <TextField
@@ -81,7 +91,27 @@ class App extends React.Component {
                 <Grid item xs={3} />
                 <Grid item xs={false} md={2} xl={2} />
                 <Grid item className={classes.search} xs={12} md={8} xl={8}>
+                    {this.state.complex_matches && <ResultsTable data={this.state.complex_matches} />}
+                </Grid>
+                <Grid item xs={false} md={2} xl={2} />
+                <Grid item xs={false} md={2} xl={2} />
+                <Grid item className={classes.search} xs={12} md={8} xl={8}>
+                    {this.state.gene_matches && <ResultsTable data={this.state.gene_matches} />}
+                </Grid>
+                <Grid item xs={false} md={2} xl={2} />
+                <Grid item xs={false} md={2} xl={2} />
+                <Grid item className={classes.search} xs={12} md={8} xl={8}>
                     {this.state.accession_matches && <ResultsTable data={this.state.accession_matches} />}
+                </Grid>
+                <Grid item xs={false} md={2} xl={2} />
+                <Grid item xs={false} md={2} xl={2} />
+                <Grid item className={classes.search} xs={12} md={8} xl={8}>
+                    {this.state.funcat_matches && <ResultsTable data={this.state.funcat_matches} />}
+                </Grid>
+                <Grid item xs={false} md={2} xl={2} />
+                <Grid item xs={false} md={2} xl={2} />
+                <Grid item className={classes.search} xs={12} md={8} xl={8}>
+                    {this.state.protein_name_matches && <ResultsTable data={this.state.protein_name_matches} />}
                 </Grid>
                 <Grid item xs={false} md={2} xl={2} />
                 <Grid item className={classes.search} xs={12}>

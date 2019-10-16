@@ -46,7 +46,7 @@ class Result extends React.Component {
                 <Grid container>
                     <Grid item xs={2}>
                         <Typography variant={"caption"}>
-                            Corum ID: {this.state.currentComplex['ComplexID']}
+                            ID: {this.state.currentComplex['ComplexID']}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
@@ -54,7 +54,12 @@ class Result extends React.Component {
                             Subunits: {this.state.currentComplex['subunits(UniProt IDs)'].split(';').length}
                         </Typography>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
+                        <Typography variant={"caption"}>
+                            {this.state.currentComplex['Organism']}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={2}>
 
                     </Grid>
                     <Grid item xs={4}>

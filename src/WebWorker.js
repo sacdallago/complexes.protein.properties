@@ -2,21 +2,13 @@
 
 export default class WebWorker {
     constructor(worker) {
-        // let code = worker.toString();
-        // code = code.substring(code.indexOf("{") + 1, code.lastIndexOf("}"));
+        let code = worker.toString();
+        code = code.substring(code.indexOf("{") + 1, code.lastIndexOf("}"));
 
-        // TODO: When updating the code in the worker, paste in the contentent of console.log(code) below!
+        // TODO: When updating the code in the worker, uncomment the following to make sure the worker... works...
+        // console.log(code);
 
-        const blob = new Blob([`
-        var onmessage = function onmessage(e) {
-            // eslint-disable-line no-unused-vars
-            // Write your code here...
-            var _e$data = e.data,
-                executable = _e$data.executable;
-    
-            postMessage(executable());
-        };
-        `], { type: "application/javascript" });
+        const blob = new Blob([code], { type: "application/javascript" });
         return new Worker(URL.createObjectURL(blob));
     }
 }
