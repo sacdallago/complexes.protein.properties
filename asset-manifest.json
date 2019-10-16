@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "search_complexes.protein.properties/static/css/main.34de6062.chunk.css",
+    "main.js": "search_complexes.protein.properties/static/js/main.5b9452e9.chunk.js",
+    "main.js.map": "search_complexes.protein.properties/static/js/main.5b9452e9.chunk.js.map",
+    "runtime-main.js": "search_complexes.protein.properties/static/js/runtime-main.5aec277e.js",
+    "runtime-main.js.map": "search_complexes.protein.properties/static/js/runtime-main.5aec277e.js.map",
+    "static/js/2.99f7e10c.chunk.js": "search_complexes.protein.properties/static/js/2.99f7e10c.chunk.js",
+    "static/js/2.99f7e10c.chunk.js.map": "search_complexes.protein.properties/static/js/2.99f7e10c.chunk.js.map",
+    "index.html": "search_complexes.protein.properties/index.html",
+    "precache-manifest.2025fa91333d1cb94612ac1c6c26189d.js": "search_complexes.protein.properties/precache-manifest.2025fa91333d1cb94612ac1c6c26189d.js",
+    "service-worker.js": "search_complexes.protein.properties/service-worker.js",
+    "static/css/main.34de6062.chunk.css.map": "search_complexes.protein.properties/static/css/main.34de6062.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5aec277e.js",
+    "static/js/2.99f7e10c.chunk.js",
+    "static/css/main.34de6062.chunk.css",
+    "static/js/main.5b9452e9.chunk.js"
+  ]
+}
