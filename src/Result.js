@@ -51,28 +51,26 @@ class Result extends React.Component {
                     </Grid>
                     <Grid item xs={2}>
                         <Typography variant={"caption"}>
-                            Subunits: {this.state.currentComplex['subunits(UniProt IDs)'].split(';').length}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Typography variant={"caption"}>
                             {this.state.currentComplex['Organism']}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
-
-                    </Grid>
-                    <Grid item xs={4}>
                         <Typography variant={"caption"}>
-                            Query match:
-                            <strong>
-                                ...{this.props.hit.search_item.substr(this.props.hit.match, 5)}...
-                            </strong>
+                            Subunits: {this.state.currentComplex['subunits(UniProt IDs)'].split(';').length}
                         </Typography>
                     </Grid>
-                </Grid>
-                <Grid container>
-                    <Grid item xs={8} />
+
+                    <Grid item xs={2}>
+                        <a
+                            href={"http://mips.helmholtz-muenchen.de/corum/?complexID=" + this.state.currentComplex['ComplexID']}
+                            target={"_blank"}
+                        >
+                            <Typography variant={"caption"}>
+                                CORUM
+                            </Typography>
+                            <OpenInNew className={classes.smallIcon} />
+                        </a>
+                    </Grid>
                     <Grid item xs={2}>
                         <a
                             href={this.state.currentComplex['subunits(UniProt IDs)'].split(';').reduce((previous, current) => previous + '&p=' + current,'https://cellmap.protein.properties/ppi?')}
@@ -94,6 +92,14 @@ class Result extends React.Component {
                             </Typography>
                             <OpenInNew className={classes.smallIcon} />
                         </a>
+                    </Grid>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={8} />
+                    <Grid item xs={4}>
+                        <Typography variant={"caption"}>
+                            Query matched by: {this.props.hit.search_item.substr(this.props.hit.match, 10)}
+                        </Typography>
                     </Grid>
                 </Grid>
             </Paper>
