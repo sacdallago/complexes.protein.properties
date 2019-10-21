@@ -1,9 +1,7 @@
 import CORUM from './data/allComplexes';
 import WebWorker from './WebWorker';
-import DataGenerator from './DataGenerator';
-import Finder from "./Finder";
 
-const dataGenerator = new WebWorker(DataGenerator);
+const dataGenerator = new WebWorker('DataGenerator');
 
 let data = {
     'uniprot_accessions':[],
@@ -28,7 +26,7 @@ Object.keys(data).forEach(e => dataGenerator.postMessage({
     CORUM: CORUM
 }));
 
-const finder = new WebWorker(Finder);
+const finder = new WebWorker('Finder');
 
 export const subscribeToFinerWoker = (callback) => {
     finder.addEventListener("message", callback, false);
