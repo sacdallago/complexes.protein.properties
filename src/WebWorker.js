@@ -6,7 +6,7 @@ export default class WebWorker {
         code = code.substring(code.indexOf("{") + 1, code.lastIndexOf("}"));
 
         // TODO: When updating the code in the worker, uncomment the following to make sure the worker... works...
-        // console.log(code);
+        console.log(code);
 
         const blob = new Blob([code], { type: "application/javascript" });
         return new Worker(URL.createObjectURL(blob));

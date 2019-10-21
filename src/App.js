@@ -6,6 +6,7 @@ import ResultsTable from './ResultsTable';
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from '@material-ui/core/Grid';
 import {subscribeToFinerWoker, assessQuery} from './utils';
+import * as version from './version';
 
 const styles = theme => ({
     attribution: {
@@ -125,6 +126,11 @@ class App extends React.Component {
                 <Grid item className={classes.search} xs={12}>
                     <Typography variant={"caption"} className={classes.attribution}>
                         This webpage is an interface to <a rel="noopener noreferrer" href="https://mips.helmholtz-muenchen.de/corum/" target="_blank">CORUM</a>. Please, cite CORUM when using any of this data for your work.
+                    </Typography>
+                </Grid>
+                <Grid item className={classes.search} xs={12}>
+                    <Typography variant={"caption"} className={classes.attribution}>
+                        Released on {(new Date(version.release)).toLocaleDateString("it-IT")}, version {version.version + 'R' + version.releaseVersion}
                     </Typography>
                 </Grid>
             </Grid>
